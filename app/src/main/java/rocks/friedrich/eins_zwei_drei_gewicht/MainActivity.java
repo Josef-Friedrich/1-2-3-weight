@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     double berechnePunkte() {
         if (fett != 0 && kalorien != 0) {
-            return fett / 60 + kalorien / 9;
+            return kalorien  / 60 + fett / 9;
         }
         return 0;
     }
