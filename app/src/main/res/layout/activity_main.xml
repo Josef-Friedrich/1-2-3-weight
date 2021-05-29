@@ -7,86 +7,108 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Fett"
-        app:helperText="Fett"
-        app:helperTextEnabled="true"
+    <EditText
+        android:id="@+id/kalorien"
+        style="@style/textFeld"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="kilokalorien"
+        app:layout_constraintBottom_toTopOf="@+id/fett"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Kilokalorien pro 100g" />
 
 
     <EditText
         android:id="@+id/fett"
-        android:layout_width="107dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="215dp"
+        style="@style/textFeld"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
+        android:layout_marginBottom="16dp"
         android:inputType="numberDecimal"
         app:helperText="fett pro 100 g"
         app:helperTextEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/portion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="fett pro 100 g" />
+        app:layout_constraintTop_toBottomOf="@+id/kalorien"
+        tools:text="Fett pro 100 g" />
 
     <EditText
         android:id="@+id/portion"
-        android:layout_width="107dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="215dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
+        style="@style/textFeld"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="portion in gramm" />
-
-    <EditText
-        android:id="@+id/kalorien"
-        android:layout_width="107dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="215dp"
-        android:layout_marginEnd="172dp"
-        android:contentDescription="kilokalorien"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="kilokalorien pro 100g" />
-
-    <TextView
-        android:id="@+id/ergebnis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="ergebnis"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/punkte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fett"
+        tools:text="Portion in Gramm" />
+
+    <TextView
+        android:id="@+id/punkte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Punkte"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/punkteProPortion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/portion" />
+
+    <TextView
+        android:id="@+id/punkteProPortion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="400dp"
+        android:text="Punkte pro Portion"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/punkte"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kilokalorien pro 100g"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kalorien" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fett pro 100g"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fett" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Portion in Gramm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/portion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
