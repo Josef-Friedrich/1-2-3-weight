@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pointsTextView = findViewById(R.id.punkte);
-        pointsPerPortionTextView = findViewById(R.id.punkteProPortion);
+        pointsTextView = findViewById(R.id.points_text_view);
+        pointsPerPortionTextView = findViewById(R.id.points_per_portion_text_view);
 
-        EditText caloriesEditText = findViewById(R.id.kalorien);
+        EditText caloriesEditText = findViewById(R.id.calories_edit_text);
         caloriesEditText.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         caloriesEditText.addTextChangedListener(new TextWatcher() {
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        EditText fatEditText = findViewById(R.id.fett);
+        EditText fatEditText = findViewById(R.id.fat_edit_text);
         fatEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 fat = convertInput(s);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        EditText portionEditText = findViewById(R.id.portion);
+        EditText portionEditText = findViewById(R.id.portion_edit_text);
         portionEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 portion = convertInput(s);
