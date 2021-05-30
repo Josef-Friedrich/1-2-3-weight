@@ -12,49 +12,49 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-    double kalorien;
-    double fett;
+    double calories;
+    double fat;
     double portion;
 
-    TextView punkteTextAnsicht;
-    TextView punkteProPortionTextAnsicht;
+    TextView pointsTextView;
+    TextView pointsPerPortionTextView;
 
-    double berechnePunkte() {
-        if (fett != 0 && kalorien != 0) {
-            return kalorien  / 60 + fett / 9;
+    double calculatePoints() {
+        if (fat != 0 && calories != 0) {
+            return calories / 60 + fat / 9;
         }
         return 0;
     }
 
-    double berechnePunkteProPortion(double punkte) {
-        if (punkte != 0 && portion != 0) {
-            return punkte * portion / 100;
+    double calculatePointsPerPortion(double points) {
+        if (points != 0 && portion != 0) {
+            return points * portion / 100;
         }
         return 0;
     }
 
-    void aktualisiereErgebnisTextAnsicht() {
-        double punkte = berechnePunkte();
-        if (punkte > 0) {
-            punkteTextAnsicht.setText(rundePunkte(punkte));
+    void updateTextViews() {
+        double points = calculatePoints();
+        if (points > 0) {
+            pointsTextView.setText(roundPoints(points));
         } else {
-            punkteTextAnsicht.setText("Punkte");
+            pointsTextView.setText(R.string.points);
         }
 
-        double punkteProPortion = berechnePunkteProPortion(punkte);
-        if (punkteProPortion > 0) {
-            punkteProPortionTextAnsicht.setText(rundePunkte(punkteProPortion));
+        double pointsPerPortion = calculatePointsPerPortion(points);
+        if (pointsPerPortion > 0) {
+            pointsPerPortionTextView.setText(roundPoints(pointsPerPortion));
         } else {
-            punkteProPortionTextAnsicht.setText("Punkte pro Portion");
+            pointsPerPortionTextView.setText(R.string.points_per_portion);
         }
     }
 
-    String rundePunkte(double zahl) {
+    String roundPoints(double number) {
         DecimalFormat df=new DecimalFormat("0.0");
-        return df.format(zahl);
+        return df.format(number);
     }
 
-    double konvertiereEingabe(Editable s) {
+    double convertInput(Editable s) {
         if (s != null && s.length() > 0) {
             try {
                 return Double.parseDouble(s.toString());
@@ -70,16 +70,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        punkteTextAnsicht = (TextView) findViewById(R.id.punkte);
-        punkteProPortionTextAnsicht = (TextView) findViewById(R.id.punkteProPortion);
+        pointsTextView = findViewById(R.id.punkte);
+        pointsPerPortionTextView = findViewById(R.id.punkteProPortion);
 
-        EditText kalorienTextFeld = (EditText) findViewById(R.id.kalorien);
-        kalorienTextFeld.requestFocus();
+        EditText caloriesEditText = findViewById(R.id.kalorien);
+        caloriesEditText.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        kalorienTextFeld.addTextChangedListener(new TextWatcher() {
+        caloriesEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                kalorien = konvertiereEingabe(s);
-                aktualisiereErgebnisTextAnsicht();
+                calories = convertInput(s);
+                updateTextViews();
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -87,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        EditText fettTextFeld = (EditText) findViewById(R.id.fett);
-        fettTextFeld.addTextChangedListener(new TextWatcher() {
+        EditText fatEditText = findViewById(R.id.fett);
+        fatEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                fett = konvertiereEingabe(s);
-                aktualisiereErgebnisTextAnsicht();
+                fat = convertInput(s);
+                updateTextViews();
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        EditText portionTextFeld = (EditText) findViewById(R.id.portion);
-        portionTextFeld.addTextChangedListener(new TextWatcher() {
+        EditText portionEditText = findViewById(R.id.portion);
+        portionEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                portion = konvertiereEingabe(s);
-                aktualisiereErgebnisTextAnsicht();
+                portion = convertInput(s);
+                updateTextViews();
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">1–2–3 Gewicht</string>
+    <string name="points">Punkte</string>
+    <string name="calories_description">Kilokalorien pro 100 Gramm</string>
+    <string name="points_per_portion">Punkte pro Portion</string>
+    <string name="fat_description">Fett pro 100 Gramm</string>
+    <string name="portion_description">Portion in Gramm</string>
+</resources>
