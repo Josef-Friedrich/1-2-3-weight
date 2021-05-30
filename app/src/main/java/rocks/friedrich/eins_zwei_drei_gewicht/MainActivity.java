@@ -9,60 +9,25 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-
 public class MainActivity extends AppCompatActivity {
-    double calories;
-    double fat;
-    double portion;
 
     TextView pointsTextView;
     TextView pointsPerPortionTextView;
 
-    double calculatePoints() {
-        if (fat != 0 && calories != 0) {
-            return calories / 60 + fat / 9;
-        }
-        return 0;
-    }
-
-    double calculatePointsPerPortion(double points) {
-        if (points != 0 && portion != 0) {
-            return points * portion / 100;
-        }
-        return 0;
-    }
-
     void updateTextViews() {
-        double points = calculatePoints();
+        double points = Formula.calculatePoints();
         if (points > 0) {
-            pointsTextView.setText(roundPoints(points));
+            pointsTextView.setText(Formula.round(points));
         } else {
             pointsTextView.setText(R.string.points);
         }
 
-        double pointsPerPortion = calculatePointsPerPortion(points);
+        double pointsPerPortion = Formula.calculatePointsPerPortion(points);
         if (pointsPerPortion > 0) {
-            pointsPerPortionTextView.setText(roundPoints(pointsPerPortion));
+            pointsPerPortionTextView.setText(Formula.round(pointsPerPortion));
         } else {
             pointsPerPortionTextView.setText(R.string.points_per_portion);
         }
-    }
-
-    String roundPoints(double number) {
-        DecimalFormat df=new DecimalFormat("0.0");
-        return df.format(number);
-    }
-
-    double convertInput(Editable s) {
-        if (s != null && s.length() > 0) {
-            try {
-                return Double.parseDouble(s.toString());
-            } catch(Exception e) {
-                return -1;
-            }
-        }
-        return 0;
     }
 
     @Override
@@ -78,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         caloriesEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                calories = convertInput(s);
+                Formula.set(s, "calories");
                 updateTextViews();
             }
 
@@ -90,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         EditText fatEditText = findViewById(R.id.fat_edit_text);
         fatEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                fat = convertInput(s);
+                Formula.set(s, "fat");
                 updateTextViews();
             }
 
@@ -102,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         EditText portionEditText = findViewById(R.id.portion_edit_text);
         portionEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                portion = convertInput(s);
+                Formula.set(s, "portion");
                 updateTextViews();
             }
 
