@@ -3,8 +3,6 @@ package rocks.friedrich.eins_zwei_drei_gewicht;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsTextView;
     TextView pointsPerPortionTextView;
 
-    void updateTextViews() {
+    public void updateTextViews() {
         double points = Formula.calculatePoints();
         if (points > 0) {
             pointsTextView.setText(Formula.round(points));
@@ -41,41 +39,12 @@ public class MainActivity extends AppCompatActivity {
         EditText caloriesEditText = findViewById(R.id.calories_edit_text);
         caloriesEditText.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        caloriesEditText.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                Formula.set(s, "calories");
-                updateTextViews();
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });
+        caloriesEditText.addTextChangedListener(new TextWatcherAdapter("calories", this));
 
         EditText fatEditText = findViewById(R.id.fat_edit_text);
-        fatEditText.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                Formula.set(s, "fat");
-                updateTextViews();
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });
+        fatEditText.addTextChangedListener(new TextWatcherAdapter("fat", this));
 
         EditText portionEditText = findViewById(R.id.portion_edit_text);
-        portionEditText.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                Formula.set(s, "portion");
-                updateTextViews();
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });
-
-
+        portionEditText.addTextChangedListener(new TextWatcherAdapter("portion", this));
     }
 }
