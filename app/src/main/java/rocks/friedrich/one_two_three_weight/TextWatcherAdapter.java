@@ -1,4 +1,4 @@
-package rocks.friedrich.eins_zwei_drei_gewicht;
+package rocks.friedrich.one_two_three_weight;
 
 import android.text.Editable;
 import android.text.TextWatcher;
