@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "rocks.friedrich.eins_zwei_drei_gewicht"
+        applicationId "rocks.friedrich.one_two_three_weight"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
