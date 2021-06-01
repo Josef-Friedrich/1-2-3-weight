@@ -7,7 +7,6 @@
     android:autofillHints="@string/calories_description"
     tools:context=".MainActivity">
 
-
     <EditText
         android:id="@+id/calories_edit_text"
         style="@style/edit_text"
@@ -19,15 +18,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <EditText
         android:id="@+id/fat_edit_text"
         style="@style/edit_text"
         android:autofillHints="@string/fat_description"
-        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/portion_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calories_edit_text" />
 
@@ -35,7 +32,6 @@
         android:id="@+id/portion_edit_text"
         style="@style/edit_text"
         android:autofillHints="@string/portion_description"
-        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/points_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -73,19 +69,19 @@
 
     <TextView
         android:id="@+id/calories_description_text_view"
+        style="@style/description_text_view"
         android:labelFor="@id/calories_edit_text"
         android:text="@string/calories_description"
         app:layout_constraintStart_toStartOf="@+id/calories_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/calories_edit_text"
-        style="@style/description_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/calories_edit_text" />
 
     <TextView
         android:id="@+id/fat_description_text_view"
+        style="@style/description_text_view"
         android:labelFor="@id/fat_edit_text"
         android:text="@string/fat_description"
         app:layout_constraintStart_toStartOf="@+id/fat_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/fat_edit_text"
-        style="@style/description_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/fat_edit_text" />
 
     <TextView
         android:id="@+id/portion_description_text_view"
