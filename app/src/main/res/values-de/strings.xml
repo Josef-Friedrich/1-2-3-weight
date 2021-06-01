@@ -5,4 +5,5 @@
     <string name="points_per_portion">Punkte pro Portion</string>
     <string name="fat_description">Fett pro 100 Gramm</string>
     <string name="portion_description">Portion in Gramm</string>
+    <string name="reset_description">Formel zurücksetzen</string>
 </resources>

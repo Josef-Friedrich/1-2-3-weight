@@ -45,7 +45,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         android:text="@string/points"
-        android:textSize="24sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/points_per_portion_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="400dp"
         android:text="@string/points_per_portion"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -90,5 +90,17 @@
         android:text="@string/portion_description"
         app:layout_constraintStart_toStartOf="@+id/portion_edit_text"
         app:layout_constraintTop_toBottomOf="@+id/portion_edit_text" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:contentDescription="@string/reset_description"
+        app:layout_constraintBottom_toBottomOf="@+id/calories_edit_text"
+        app:layout_constraintEnd_toStartOf="@+id/calories_edit_text"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

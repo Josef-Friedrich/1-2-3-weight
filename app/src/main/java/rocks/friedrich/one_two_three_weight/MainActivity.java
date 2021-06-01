@@ -1,13 +1,19 @@
 package rocks.friedrich.one_two_three_weight;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
+
+    EditText caloriesEditText;
+    EditText fatEditText;
+    EditText portionEditText;
 
     TextView pointsTextView;
     TextView pointsPerPortionTextView;
@@ -28,6 +34,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void resetForNewCalculation() {
+        caloriesEditText.getText().clear();
+        fatEditText.getText().clear();
+        portionEditText.getText().clear();
+        Formula.reset();
+        updateTextViews();
+        focusFirstEditText();
+    }
+
+    public void focusFirstEditText() {
+        caloriesEditText.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +56,17 @@ public class MainActivity extends AppCompatActivity {
         pointsTextView = findViewById(R.id.points_text_view);
         pointsPerPortionTextView = findViewById(R.id.points_per_portion_text_view);
 
-        EditText caloriesEditText = findViewById(R.id.calories_edit_text);
-        caloriesEditText.requestFocus();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        caloriesEditText = findViewById(R.id.calories_edit_text);
+        focusFirstEditText();
+
         caloriesEditText.addTextChangedListener(new TextWatcherAdapter("calories", this));
 
-        EditText fatEditText = findViewById(R.id.fat_edit_text);
+        fatEditText = findViewById(R.id.fat_edit_text);
         fatEditText.addTextChangedListener(new TextWatcherAdapter("fat", this));
 
-        EditText portionEditText = findViewById(R.id.portion_edit_text);
+        portionEditText = findViewById(R.id.portion_edit_text);
         portionEditText.addTextChangedListener(new TextWatcherAdapter("portion", this));
+        FloatingActionButton resetButton = findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(view -> resetForNewCalculation());
     }
 }
