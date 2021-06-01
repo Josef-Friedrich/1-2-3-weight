@@ -4,12 +4,19 @@
     <style name="edit_text">
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginTop">92dp</item>
-        <item name="android:layout_marginEnd">172dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">numberDecimal</item>
        <!-- To allow commas as a separator for floating point numbers https://stackoverflow.com/a/6280607 -->
         <item name="android:digits">0123456789.,</item>
+    </style>
+
+    <style name="description_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

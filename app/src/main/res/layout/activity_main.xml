@@ -11,10 +11,7 @@
     <EditText
         android:id="@+id/calories_edit_text"
         style="@style/edit_text"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="200dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:autofillHints="@string/calories_description"
         app:layout_constraintBottom_toTopOf="@+id/fat_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +23,6 @@
     <EditText
         android:id="@+id/fat_edit_text"
         style="@style/edit_text"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:autofillHints="@string/fat_description"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/portion_edit_text"
@@ -41,10 +34,6 @@
     <EditText
         android:id="@+id/portion_edit_text"
         style="@style/edit_text"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:autofillHints="@string/portion_description"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/points_text_view"
@@ -84,26 +73,23 @@
 
     <TextView
         android:id="@+id/calories_description_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:labelFor="@id/calories_edit_text"
         android:text="@string/calories_description"
         app:layout_constraintStart_toStartOf="@+id/calories_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/calories_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/calories_edit_text"
+        style="@style/description_text_view" />
 
     <TextView
         android:id="@+id/fat_description_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:labelFor="@id/fat_edit_text"
         android:text="@string/fat_description"
         app:layout_constraintStart_toStartOf="@+id/fat_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/fat_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/fat_edit_text"
+        style="@style/description_text_view" />
 
     <TextView
         android:id="@+id/portion_description_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/description_text_view"
         android:labelFor="@id/portion_edit_text"
         android:text="@string/portion_description"
         app:layout_constraintStart_toStartOf="@+id/portion_edit_text"
