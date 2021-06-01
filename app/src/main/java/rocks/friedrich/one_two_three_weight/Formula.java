@@ -11,7 +11,8 @@ public class Formula {
 
     private static double convertToDouble(Editable input) {
         try {
-            return Double.parseDouble(input.toString());
+            // To allow commas as a separator for floating point numbers https://stackoverflow.com/a/6280607
+            return Double.parseDouble(input.toString().replace(',', '.'));
         } catch (Exception e) {
             return -1;
         }
@@ -47,7 +48,7 @@ public class Formula {
     }
 
     public static String round(double number) {
-        DecimalFormat df=new DecimalFormat("0.0");
+        DecimalFormat df = new DecimalFormat("0.0");
         return df.format(number);
     }
 

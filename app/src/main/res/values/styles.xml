@@ -9,5 +9,7 @@
         <item name="android:layout_marginEnd">172dp</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">numberDecimal</item>
+       <!-- To allow commas as a separator for floating point numbers https://stackoverflow.com/a/6280607 -->
+        <item name="android:digits">0123456789.,</item>
     </style>
 </resources>
