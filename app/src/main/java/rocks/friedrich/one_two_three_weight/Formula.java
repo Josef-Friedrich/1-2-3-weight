@@ -40,14 +40,18 @@ public class Formula {
     }
 
     public static double calculatePoints() {
-        return calories / 60 + fat / 9;
+        return roundToDouble(calories / 60 + fat / 9);
     }
 
     public static double calculatePointsPerPortion(double points) {
-        return points * portion / 100;
+        return roundToDouble(points * portion / 100);
     }
 
-    public static String round(double number) {
+    public static double roundToDouble(double input) {
+        return (double) Math.round(input * 10) / 10;
+    }
+
+    public static String roundToString(double number) {
         DecimalFormat df = new DecimalFormat("0.0");
         return df.format(number);
     }

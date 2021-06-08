@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
     public void updateTextViews() {
         double points = Formula.calculatePoints();
         if (points > 0) {
-            pointsTextView.setText(Formula.round(points));
+            pointsTextView.setText(Formula.roundToString(points));
         } else {
             pointsTextView.setText(R.string.points);
         }
 
         double pointsPerPortion = Formula.calculatePointsPerPortion(points);
         if (pointsPerPortion > 0) {
-            pointsPerPortionTextView.setText(Formula.round(pointsPerPortion));
+            pointsPerPortionTextView.setText(Formula.roundToString(pointsPerPortion));
         } else {
             pointsPerPortionTextView.setText(R.string.points_per_portion);
         }
