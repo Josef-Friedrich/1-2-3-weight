@@ -18,17 +18,19 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsTextView;
     TextView pointsPerPortionTextView;
 
+    Formula formula = new Formula();
+
     public void updateTextViews() {
-        double points = Formula.calculatePoints();
+        double points = formula.calculatePoints();
         if (points > 0) {
-            pointsTextView.setText(Formula.roundToString(points));
+            pointsTextView.setText(formula.roundToString(points));
         } else {
             pointsTextView.setText(R.string.points);
         }
 
-        double pointsPerPortion = Formula.calculatePointsPerPortion(points);
+        double pointsPerPortion = formula.calculatePointsPerPortion(points);
         if (pointsPerPortion > 0) {
-            pointsPerPortionTextView.setText(Formula.roundToString(pointsPerPortion));
+            pointsPerPortionTextView.setText(formula.roundToString(pointsPerPortion));
         } else {
             pointsPerPortionTextView.setText(R.string.points_per_portion);
         }
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         caloriesEditText.getText().clear();
         fatEditText.getText().clear();
         portionEditText.getText().clear();
-        Formula.reset();
+        formula.reset();
         updateTextViews();
         focusFirstEditText();
     }
@@ -59,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
         caloriesEditText = findViewById(R.id.calories_edit_text);
         focusFirstEditText();
 
-        caloriesEditText.addTextChangedListener(new TextWatcherAdapter("calories", this));
+        caloriesEditText.addTextChangedListener(new TextWatcherAdapter("calories", this, formula));
 
         fatEditText = findViewById(R.id.fat_edit_text);
-        fatEditText.addTextChangedListener(new TextWatcherAdapter("fat", this));
+        fatEditText.addTextChangedListener(new TextWatcherAdapter("fat", this, formula));
 
         portionEditText = findViewById(R.id.portion_edit_text);
-        portionEditText.addTextChangedListener(new TextWatcherAdapter("portion", this));
+        portionEditText.addTextChangedListener(new TextWatcherAdapter("portion", this, formula));
         FloatingActionButton resetButton = findViewById(R.id.reset_button);
         resetButton.setOnClickListener(view -> resetForNewCalculation());
     }

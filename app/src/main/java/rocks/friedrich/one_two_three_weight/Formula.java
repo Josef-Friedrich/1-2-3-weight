@@ -5,11 +5,23 @@ import android.text.Editable;
 import java.text.DecimalFormat;
 
 public class Formula {
-    private static double calories = 0;
-    private static double fat = 0;
-    private static double portion = 0;
+    private double calories;
+    private double fat;
+    private double portion;
 
-    private static double convertToDouble(Editable input) {
+    public Formula (double calories, double fat, double portion) {
+        this.calories = calories;
+        this.fat = fat;
+        this.portion = portion;
+    }
+
+    public Formula () {
+        this.calories = 0;
+        this.fat = 0;
+        this.portion = 0;
+    }
+
+    private double convertToDouble(Editable input) {
         try {
             // To allow commas as a separator for floating point numbers https://stackoverflow.com/a/6280607
             return Double.parseDouble(input.toString().replace(',', '.'));
@@ -18,7 +30,31 @@ public class Formula {
         }
     }
 
-    public static void set(Editable input, String valueName) {
+    public void setCalories(double calories) {
+        this.calories = calories;
+    }
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public void setFat(double fat) {
+        this.fat = fat;
+    }
+
+    public double getFat() {
+        return fat;
+    }
+
+    public void setPortion(double portion) {
+        this.portion = portion;
+    }
+
+    public double getPortion() {
+        return portion;
+    }
+
+    public void set(Editable input, String valueName) {
         if (input != null && input.length() > 0) {
             double value = convertToDouble(input);
             if (value > -1) {
@@ -39,24 +75,28 @@ public class Formula {
         }
     }
 
-    public static double calculatePoints() {
+    public double calculatePoints() {
         return roundToDouble(calories / 60 + fat / 9);
     }
 
-    public static double calculatePointsPerPortion(double points) {
+    public double calculatePointsPerPortion() {
+        return roundToDouble(calculatePoints() * portion / 100);
+    }
+
+    public double calculatePointsPerPortion(double points) {
         return roundToDouble(points * portion / 100);
     }
 
-    public static double roundToDouble(double input) {
+    public double roundToDouble(double input) {
         return (double) Math.round(input * 10) / 10;
     }
 
-    public static String roundToString(double number) {
+    public String roundToString(double number) {
         DecimalFormat df = new DecimalFormat("0.0");
         return df.format(number);
     }
 
-    public static void reset() {
+    public void reset() {
         calories = 0;
         fat = 0;
         portion = 0;

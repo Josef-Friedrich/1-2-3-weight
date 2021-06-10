@@ -7,14 +7,16 @@ public class TextWatcherAdapter implements TextWatcher {
 
     private String valueName;
     private MainActivity mainActivity;
+    private Formula formula;
 
-    public TextWatcherAdapter(String valueName, MainActivity mainActivity) {
+    public TextWatcherAdapter(String valueName, MainActivity mainActivity, Formula formula) {
         this.valueName = valueName;
         this.mainActivity = mainActivity;
+        this.formula = formula;
     }
 
     public void afterTextChanged(Editable s) {
-        Formula.set(s, valueName);
+        formula.set(s, valueName);
         mainActivity.updateTextViews();
     }
 
