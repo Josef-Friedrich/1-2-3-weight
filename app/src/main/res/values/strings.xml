@@ -6,4 +6,5 @@
     <string name="fat_description">Fat per 100 Grams</string>
     <string name="portion_description">Portion in Grams</string>
     <string name="reset_description">Reset formula</string>
+    <string name="indicator_image_description">An indicator image for low normal and high points</string>
 </resources>
