@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
         double points = formula.calculatePoints();
         if (points > 0) {
             pointsTextView.setText(formula.roundToString(points));
+            portionEditText.setEnabled(true);
         } else {
             pointsTextView.setText(R.string.points);
+            portionEditText.setEnabled(false);
         }
 
-
         double pointsPerPortion = formula.calculatePointsPerPortion(points);
+
         if (pointsPerPortion > 0) {
             pointsPerPortionTextView.setText(formula.roundToString(pointsPerPortion));
         } else {
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         portionEditText = findViewById(R.id.portion_edit_text);
         portionEditText.addTextChangedListener(new TextWatcherAdapter("portion", this, formula));
+        portionEditText.setEnabled(false);
         FloatingActionButton resetButton = findViewById(R.id.reset_button);
         resetButton.setOnClickListener(view -> resetForNewCalculation());
     }

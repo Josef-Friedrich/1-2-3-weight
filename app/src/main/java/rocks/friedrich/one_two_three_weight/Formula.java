@@ -16,9 +16,9 @@ public class Formula {
     }
 
     public Formula () {
-        this.calories = 0;
-        this.fat = 0;
-        this.portion = 0;
+        this.calories = -1;
+        this.fat = -1;
+        this.portion = -1;
     }
 
     private double convertToDouble(Editable input) {
@@ -55,36 +55,60 @@ public class Formula {
     }
 
     public void set(Editable input, String valueName) {
+        double value;
         if (input != null && input.length() > 0) {
-            double value = convertToDouble(input);
-            if (value > -1) {
-                switch (valueName) {
-                    case "calories":
-                        calories = value;
-                        break;
-                    case "fat":
-                        fat = value;
-                        break;
-                    case "portion":
-                        portion = value;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Invalid value name: allowed names are calories, fat, portion");
-                }
-            }
+            value = convertToDouble(input);
+        } else {
+            value = -1;
+        }
+
+        switch (valueName) {
+            case "calories":
+                calories = value;
+                break;
+            case "fat":
+                fat = value;
+                break;
+            case "portion":
+                portion = value;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid value name: allowed names are calories, fat, portion");
         }
     }
 
     public double calculatePoints() {
-        return roundToDouble(calories / 60 + fat / 9);
+        double points = 0;
+        if (calories > -1) {
+            points = calories / 60;
+        }
+
+        if (fat > -1) {
+            points = points + fat / 9;
+        }
+
+        points = roundToDouble(points);
+        // Show always a points number greater than zero if there is an input
+        if (points == 0 && (calories > -1 || fat > -1)) {
+            return 0.1;
+        }
+        return points;
     }
 
     public double calculatePointsPerPortion() {
-        return roundToDouble(calculatePoints() * portion / 100);
+        return calculatePointsPerPortion(calculatePoints());
     }
 
     public double calculatePointsPerPortion(double points) {
-        return roundToDouble(points * portion / 100);
+        if (points == 0) {
+            return 0;
+        }
+        double result = roundToDouble(points * portion / 100);
+
+        if (result == 0 && portion > -1) {
+            return 0.1;
+        }
+        return result;
     }
 
     public double roundToDouble(double input) {
@@ -97,8 +121,8 @@ public class Formula {
     }
 
     public void reset() {
-        calories = 0;
-        fat = 0;
-        portion = 0;
+        calories = -1;
+        fat = -1;
+        portion = -1;
     }
 }
