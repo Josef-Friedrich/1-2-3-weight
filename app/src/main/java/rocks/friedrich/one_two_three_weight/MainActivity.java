@@ -57,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
         if (points <= 4) {
             image = R.drawable.slim;
             color = R.color.green_500;
-
         } else if (points > 4 && points < 8) {
             image = R.drawable.medium;
-            color = R.color.yellow_500;
-
+            color = R.color.orange_500;
         } else {
             image = R.drawable.fat;
             color = R.color.red_500;
