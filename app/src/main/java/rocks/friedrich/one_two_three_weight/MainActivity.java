@@ -1,6 +1,5 @@
 package rocks.friedrich.one_two_three_weight;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.EditText;
