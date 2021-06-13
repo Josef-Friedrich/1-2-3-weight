@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     EditText fatEditText;
     EditText portionEditText;
 
+    double oldPoints = 0;
+    double oldPointsPerPortion = 0;
     TextView pointsTextView;
     TextView pointsPerPortionTextView;
 
@@ -25,23 +27,39 @@ public class MainActivity extends AppCompatActivity {
 
     Formula formula = new Formula();
 
+    private void animatePoints(TextView textView, double oldPoints, double newPoints) {
+        if ((Math.abs(newPoints - oldPoints) >= 0.1)) {
+            AnimateCounter animateCounter = new AnimateCounter.Builder(textView)
+                    .setCount((float) oldPoints, (float) newPoints, 1)
+                    .setDuration(500)
+                    .build();
+            animateCounter.execute();
+        }
+    }
+
     public void updateTextViews() {
         double points = formula.calculatePoints();
         if (points > 0) {
-            pointsTextView.setText(formula.roundToString(points));
+            animatePoints(pointsTextView, oldPoints, points);
+           // pointsTextView.setText(formula.roundToString(points));
             portionEditText.setEnabled(true);
         } else {
             pointsTextView.setText(R.string.points);
             portionEditText.setEnabled(false);
         }
 
+        oldPoints = points;
+
         double pointsPerPortion = formula.calculatePointsPerPortion(points);
 
         if (pointsPerPortion > 0) {
-            pointsPerPortionTextView.setText(formula.roundToString(pointsPerPortion));
+            animatePoints(pointsPerPortionTextView, oldPointsPerPortion, pointsPerPortion);
+            //pointsPerPortionTextView.setText(formula.roundToString(pointsPerPortion));
         } else {
             pointsPerPortionTextView.setText(R.string.points_per_portion);
         }
+
+        oldPointsPerPortion = pointsPerPortion;
 
         if (pointsPerPortion > 0) {
             updateIndicatorImage(pointsPerPortion);
