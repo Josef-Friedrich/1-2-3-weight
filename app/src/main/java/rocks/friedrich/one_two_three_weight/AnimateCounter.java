@@ -34,68 +34,70 @@ public class AnimateCounter {
     /**
      * TextView to be animated
      */
-    private final TextView mView;
+    private final TextView view;
     /**
      * Duration of animation
      */
-    private final long mDuration;
+    private final long duration;
     /**
      * Initial value to start animation
      */
-    private final float mStartValue;
+    private float startValue;
     /**
      * End value to finish animation
      */
-    private final float mEndValue;
+    private final float endValue;
     /**
      * Decimal precision for floating point values
      */
-    private final int mPrecision;
+    private final int precision;
     /**
      * Interpolator functionality to apply to animation
      */
-    private final Interpolator mInterpolator;
-    private ValueAnimator mValueAnimator;
+    private final Interpolator interpolator;
+    private ValueAnimator valueAnimator;
 
     /**
      * Provides optional callback functionality on completion of animation
      */
-    private AnimateCounterListener mListener;
+    private AnimateCounterListener listener;
 
     /**
      * Call to execute the animation
      */
     public void execute(){
-        mValueAnimator = ValueAnimator.ofFloat(mStartValue, mEndValue);
-        mValueAnimator.setDuration(mDuration);
-        mValueAnimator.setInterpolator(mInterpolator);
-        mValueAnimator.addUpdateListener(valueAnimator -> {
+        // Fix glitch with negative start values by points per portion
+        if (startValue < 0) startValue = 0f;
+        valueAnimator = ValueAnimator.ofFloat(startValue, endValue);
+        valueAnimator.setDuration(duration);
+        valueAnimator.setInterpolator(interpolator);
+        valueAnimator.addUpdateListener(valueAnimator -> {
             float current = Float.parseFloat(valueAnimator.getAnimatedValue().toString());
-            mView.setText(String.format("%." + mPrecision + "f", current));
+            view.setText(String.format("%." + precision + "f", current));
         });
 
-        mValueAnimator.addListener(new AnimatorListenerAdapter() {
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mListener != null) {
-                    mListener.onAnimateCounterEnd();
+                if (listener != null) {
+                    listener.onAnimateCounterEnd();
                 }
             }
         });
 
-        mValueAnimator.start();
+        valueAnimator.start();
     }
 
     public static class Builder {
-        private long mDuration = 2000;
-        private float mStartValue = 0;
-        private float mEndValue = 10;
-        private int mPrecision = 0;
-        private Interpolator mInterpolator = null;
-        private final TextView mView;
+        private long duration = 2000;
+        private float startValue = 0;
+        private float endValue = 10;
+        private int precision = 0;
+        private Interpolator interpolator = null;
+        private final TextView view;
 
         public Builder(@NonNull TextView view) {
-            mView = view;
+            this.view = view;
         }
 
         /**
@@ -110,9 +112,9 @@ public class AnimateCounter {
                 throw new IllegalArgumentException("Count start and end must be different");
             }
 
-            mStartValue = start;
-            mEndValue = end;
-            mPrecision = 0;
+            startValue = start;
+            endValue = end;
+            precision = 0;
             return this;
         }
 
@@ -131,9 +133,9 @@ public class AnimateCounter {
             if (precision < 0) {
                 throw new IllegalArgumentException("Precision can't be negative");
             }
-            mStartValue = start;
-            mEndValue = end;
-            mPrecision = precision;
+            startValue = start;
+            endValue = end;
+            this.precision = precision;
             return this;
         }
 
@@ -147,7 +149,7 @@ public class AnimateCounter {
             if (duration <= 0) {
                 throw new IllegalArgumentException("Duration must be positive value");
             }
-            mDuration = duration;
+            this.duration = duration;
             return this;
         }
 
@@ -158,7 +160,7 @@ public class AnimateCounter {
          * @return This Builder object to allow for chaining of calls to set methods
          */
         public Builder setInterpolator(@Nullable Interpolator interpolator) {
-            mInterpolator = interpolator;
+            this.interpolator = interpolator;
             return this;
         }
 
@@ -173,20 +175,20 @@ public class AnimateCounter {
     }
 
     private AnimateCounter(Builder builder) {
-        mView = builder.mView;
-        mDuration = builder.mDuration;
-        mStartValue = builder.mStartValue;
-        mEndValue = builder.mEndValue;
-        mPrecision = builder.mPrecision;
-        mInterpolator = builder.mInterpolator;
+        view = builder.view;
+        duration = builder.duration;
+        startValue = builder.startValue;
+        endValue = builder.endValue;
+        precision = builder.precision;
+        interpolator = builder.interpolator;
     }
 
     /**
      * Stop the current animation
      */
     public void stop() {
-        if (mValueAnimator.isRunning()) {
-            mValueAnimator.cancel();
+        if (valueAnimator.isRunning()) {
+            valueAnimator.cancel();
         }
     }
 
@@ -196,7 +198,7 @@ public class AnimateCounter {
      * @param listener AnimationCounterListener to be used for callbacks
      */
     public void setAnimateCounterListener(AnimateCounterListener listener) {
-        mListener = listener;
+        this.listener = listener;
     }
 
     /**
