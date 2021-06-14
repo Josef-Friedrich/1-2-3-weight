@@ -1,5 +1,8 @@
 package rocks.friedrich.one_two_three_weight;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -25,17 +28,32 @@ public class MainActivity extends AppCompatActivity {
     TextView pointsPerPortionTextView;
 
     ImageView indicatorImage;
-
+    ValueAnimator valueAnimator;
     Formula formula = new Formula();
 
     private void animatePoints(TextView textView, double oldPoints, double newPoints) {
+        if (valueAnimator != null) {
+            valueAnimator.end();
+        }
+
         if ((Math.abs(newPoints - oldPoints) > 1)) {
-            AnimateCounter animateCounter = new AnimateCounter.Builder(textView)
-                    .setCount((float) oldPoints, (float) newPoints, 1)
-                    .setDuration(500)
-                    .build();
-            animateCounter.execute();
-            animateCounter.setAnimateCounterListener(this::updateIndicatorImage);
+            // Fix glitch with negative start values by points per portion
+            if (oldPoints < 0) oldPoints = 0f;
+            valueAnimator = ValueAnimator.ofFloat((float) oldPoints, (float) newPoints);
+            valueAnimator.setDuration(500);
+            valueAnimator.addUpdateListener(a -> {
+                float current = Float.parseFloat(a.getAnimatedValue().toString());
+                textView.setText(String.format("%.1f", current));
+            });
+
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    updateIndicatorImage();
+                }
+            });
+
+            valueAnimator.start();
         } else {
             textView.setText(formula.roundToString(newPoints));
             updateIndicatorImage();
