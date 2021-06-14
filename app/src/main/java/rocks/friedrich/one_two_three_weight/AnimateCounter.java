@@ -34,27 +34,27 @@ public class AnimateCounter {
     /**
      * TextView to be animated
      */
-    private TextView mView;
+    private final TextView mView;
     /**
      * Duration of animation
      */
-    private long mDuration;
+    private final long mDuration;
     /**
      * Initial value to start animation
      */
-    private float mStartValue;
+    private final float mStartValue;
     /**
      * End value to finish animation
      */
-    private float mEndValue;
+    private final float mEndValue;
     /**
      * Decimal precision for floating point values
      */
-    private int mPrecision;
+    private final int mPrecision;
     /**
      * Interpolator functionality to apply to animation
      */
-    private Interpolator mInterpolator;
+    private final Interpolator mInterpolator;
     private ValueAnimator mValueAnimator;
 
     /**
@@ -69,12 +69,9 @@ public class AnimateCounter {
         mValueAnimator = ValueAnimator.ofFloat(mStartValue, mEndValue);
         mValueAnimator.setDuration(mDuration);
         mValueAnimator.setInterpolator(mInterpolator);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float current = Float.valueOf(valueAnimator.getAnimatedValue().toString());
-                mView.setText(String.format("%." + mPrecision + "f", current));
-            }
+        mValueAnimator.addUpdateListener(valueAnimator -> {
+            float current = Float.parseFloat(valueAnimator.getAnimatedValue().toString());
+            mView.setText(String.format("%." + mPrecision + "f", current));
         });
 
         mValueAnimator.addListener(new AnimatorListenerAdapter() {
@@ -95,12 +92,9 @@ public class AnimateCounter {
         private float mEndValue = 10;
         private int mPrecision = 0;
         private Interpolator mInterpolator = null;
-        private TextView mView;
+        private final TextView mView;
 
         public Builder(@NonNull TextView view) {
-            if (view == null) {
-                throw new IllegalArgumentException("View can not be null");
-            }
             mView = view;
         }
 

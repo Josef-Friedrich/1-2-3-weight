@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
     Formula formula = new Formula();
 
     private void animatePoints(TextView textView, double oldPoints, double newPoints) {
-        if ((Math.abs(newPoints - oldPoints) >= 0.1)) {
+        if ((Math.abs(newPoints - oldPoints) > 1)) {
             AnimateCounter animateCounter = new AnimateCounter.Builder(textView)
                     .setCount((float) oldPoints, (float) newPoints, 1)
                     .setDuration(500)
                     .build();
             animateCounter.execute();
+        } else {
+            textView.setText(formula.roundToString(newPoints));
         }
     }
 
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         double points = formula.calculatePoints();
         if (points > 0) {
             animatePoints(pointsTextView, oldPoints, points);
-           // pointsTextView.setText(formula.roundToString(points));
             portionEditText.setEnabled(true);
         } else {
             pointsTextView.setText(R.string.points);
