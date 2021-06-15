@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/points_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
@@ -57,7 +57,7 @@
 
     <TextView
         android:id="@+id/points_per_portion_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="400dp"
@@ -98,10 +98,11 @@
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
         android:clickable="true"
         android:contentDescription="@string/reset_description"
+        app:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toBottomOf="@+id/calories_edit_text"
         app:layout_constraintEnd_toStartOf="@+id/calories_edit_text"
         app:srcCompat="@android:drawable/ic_menu_add" />
@@ -110,25 +111,13 @@
         android:id="@+id/indicator_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:contentDescription="@string/indicator_image_description"
-        android:scaleX="2"
-        android:scaleY="2"
-        app:layout_constraintBottom_toBottomOf="@+id/points_text_view"
+        android:scaleX="3"
+        android:scaleY="3"
+        app:layout_constraintBottom_toBottomOf="@+id/points_per_portion_text_view"
         app:layout_constraintStart_toEndOf="@+id/points_text_view"
         app:layout_constraintTop_toTopOf="@+id/points_text_view"
         app:srcCompat="@drawable/slim"
         app:tint="@color/green_500" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
-        app:srcCompat="@drawable/ic_logo_as_paths" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
