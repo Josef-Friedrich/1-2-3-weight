@@ -112,12 +112,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/indicator_image_description"
-        android:scaleX="3"
-        android:scaleY="3"
+        android:translationX="-32dp"
         app:layout_constraintBottom_toBottomOf="@+id/points_per_portion_text_view"
         app:layout_constraintStart_toEndOf="@+id/points_text_view"
         app:layout_constraintTop_toTopOf="@+id/points_text_view"
-        app:srcCompat="@drawable/slim"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_slim"
         app:tint="@color/green_500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
