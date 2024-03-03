@@ -8,7 +8,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.123Weight">
-        <activity android:name="rocks.friedrich.one_two_three_weight.MainActivity">
+        <activity android:name="rocks.friedrich.one_two_three_weight.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
